@@ -321,3 +321,81 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
+  /employees:
+    post:
+      tags: [Empleados]
+      summary: Crea un empleado
+      description: 'Roles permitidos: `admin`.'
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/EmployeeCreate' }
+      responses:
+        '201':
+          description: Empleado creado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Employee' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    get:
+      tags: [Empleados]
+      summary: Lista empleados
+      description: 'Roles permitidos: `admin`.'
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: limit, in: query, schema: { type: integer, default: 10 } }
+        - { name: offset, in: query, schema: { type: integer, default: 0 } }
+        - { name: role, in: query, schema: { $ref: '#/components/schemas/Role' } }
+      responses:
+        '200':
+          description: Lista de empleados
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Employee' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  /employees/{id}:
+    get:
+      tags: [Empleados]
+      summary: Obtiene un empleado
+      description: 'Roles permitidos: `admin`.'
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Empleado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Employee' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /restaurants/{restaurantId}/employees:
+    get:
+      tags: [Empleados]
+      summary: Lista los empleados de un restaurante
+      description: 'Roles permitidos: `admin`.'
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: restaurantId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Empleados del restaurante
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Employee' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }

@@ -21,7 +21,7 @@ Cada tarea debe durar entre 5 y 10 minutos.
 - [x] 3. Esquemas `Restaurant`, `Ingredient`, `Dish` (+ `DishIngredient`) y sus entradas create/update (~10 min)
 - [x] 4. Esquemas `Order`, `OrderItem`, creación de pedido, `Employee`, login y register (~10 min)
 - [x] 5. Paths de `auth` y `/health` (~7 min)
-- [ ] 6. Paths de `employees` y `restaurants/{restaurantId}/employees` (~8 min)
+- [x] 6. Paths de `employees` y `restaurants/{restaurantId}/employees` (~8 min)
 - [ ] 7. Paths de `restaurants` y `public/restaurants` (~8 min)
 - [ ] 8. Paths de `ingredients` (~8 min)
 - [ ] 9. Paths de `dishes` y `public/restaurants/{restaurantId}/dishes` (~10 min)
