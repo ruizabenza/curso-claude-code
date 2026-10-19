@@ -29,7 +29,7 @@ Cada tarea debe durar entre 5 y 10 minutos.
 - [x] 11. Añadir `@redocly/cli` y scripts `docs:lint` y `docs:build` (~5 min)
 - [x] 12. Ejecutar `npm run docs:lint` y corregir errores (~10 min)
 - [x] 13. Test de contrato `packages/api/src/openapi.test.ts` (~10 min)
-- [ ] 14. Ejecutar `npm run docs:build` y comprobar el HTML (~5 min)
+- [x] 14. Ejecutar `npm run docs:build` y comprobar el HTML (~5 min)
 - [ ] 15. Documentar en `CLAUDE.md` y `docs/arquitectura/arquitectura-api.md` (~5 min)
 
 **Tiempo total estimado:** 124 min
@@ -55,3 +55,4 @@ Cada tarea debe durar entre 5 y 10 minutos.
 - El directorio no era un repo git: se hizo `git init` con un commit base y `.gitignore` (decidido con el usuario).
 - Corrección tras la tarea 1: el recuento real de endpoints es 29 (no 31): auth 2, employees 3, restaurant-employees 1, restaurants 4, ingredients 5, dishes 5, public restaurants 2, public dishes 1, orders 5, health 1.
 - Hallazgos para el contrato: el formato de error no es uniforme. Los errores de dominio vía `errorHandler` devuelven `{error, message}`; `authenticate`/`authorize` y `OrderController` devuelven solo `{error: "<mensaje>"}`. Se documentan ambos tal cual. En orders, los errores inesperados devuelven 500, y `GET /orders/active` sin `restaurantId` devuelve 400.
+- Nota tarea 14: `index.html` queda prerenderizado (29 operaciones, 373 KiB) pero carga el bundle de Redoc y las fuentes desde CDN (`cdn.redocly.com`, `fonts.googleapis.com`); sin conexión se ve el contenido estático pero no la interactividad. No se comprobó visualmente en un navegador, solo inspeccionando el HTML generado.
