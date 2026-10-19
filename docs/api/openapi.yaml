@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: API de Resttek
+  version: 1.0.0
+  description: |
+    API REST de la plataforma de gestión de restaurantes Resttek.
+
+    **Autenticación:** JWT en la cabecera `Authorization: Bearer <token>`. El token se obtiene con
+    `POST /auth/login` o `POST /auth/register`. Los endpoints públicos y `/auth/*` no requieren token.
+
+    **Roles:** `admin`, `manager`, `camarero`, `cocinero`, `cliente`. Cada operación indica los roles permitidos.
+
+    **Formato de errores:** los errores de dominio responden `{ "error": "<NombreDelError>", "message": "<detalle>" }`.
+    Los middlewares de autenticación/autorización y el módulo de pedidos responden solo `{ "error": "<mensaje>" }`.
+servers:
+  - url: /api/v1
+    description: Prefijo de la API (los frontends hacen proxy de /api a localhost:3000)
+tags:
+  - name: Auth
+    description: Inicio de sesión y registro de clientes
+  - name: Empleados
+    description: Gestión de usuarios/empleados
+  - name: Restaurantes
+    description: Restaurantes (acceso autenticado)
+  - name: Ingredientes
+    description: Ingredientes y stock de un restaurante
+  - name: Platos
+    description: Carta de un restaurante
+  - name: Pedidos
+    description: Pedidos y estado de sus líneas
+  - name: Público
+    description: Endpoints sin autenticación
+  - name: Sistema
+    description: Salud del servicio
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    BadRequest:
+      description: Datos inválidos (error de dominio)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Token ausente, malformado o inválido
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SimpleError'
+          example:
+            error: 'Unauthorized: No token provided'
+    Forbidden:
+      description: El rol del usuario no tiene permiso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SimpleError'
+          example:
+            error: 'Forbidden: Insufficient permissions'
+    NotFound:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: string
+          example: DishNotFoundError
+        message:
+          type: string
+          example: Dish not found
+    SimpleError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+paths: {}
