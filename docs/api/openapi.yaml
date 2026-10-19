@@ -502,3 +502,94 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Restaurant' }
         '404': { $ref: '#/components/responses/NotFound' }
+  /restaurants/{restaurantId}/ingredients:
+    parameters:
+      - { name: restaurantId, in: path, required: true, schema: { type: string } }
+    post:
+      tags: [Ingredientes]
+      summary: Crea un ingrediente
+      description: 'Roles permitidos: `admin`.'
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IngredientCreate' }
+      responses:
+        '201':
+          description: Ingrediente creado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Ingredient' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    get:
+      tags: [Ingredientes]
+      summary: Lista los ingredientes de un restaurante
+      description: 'Roles permitidos: `admin`, `manager`, `cocinero`.'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de ingredientes
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Ingredient' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  /restaurants/{restaurantId}/ingredients/{id}:
+    parameters:
+      - { name: restaurantId, in: path, required: true, schema: { type: string } }
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Ingredientes]
+      summary: Obtiene un ingrediente
+      description: 'Roles permitidos: `admin`, `manager`, `cocinero`.'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Ingrediente
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Ingredient' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    put:
+      tags: [Ingredientes]
+      summary: Actualiza un ingrediente
+      description: 'Roles permitidos: `admin`.'
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/IngredientUpdate' }
+      responses:
+        '200':
+          description: Ingrediente actualizado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Ingredient' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    delete:
+      tags: [Ingredientes]
+      summary: Elimina un ingrediente
+      description: 'Roles permitidos: `admin`.'
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Ingrediente eliminado
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }

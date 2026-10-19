@@ -23,7 +23,7 @@ Cada tarea debe durar entre 5 y 10 minutos.
 - [x] 5. Paths de `auth` y `/health` (~7 min)
 - [x] 6. Paths de `employees` y `restaurants/{restaurantId}/employees` (~8 min)
 - [x] 7. Paths de `restaurants` y `public/restaurants` (~8 min)
-- [ ] 8. Paths de `ingredients` (~8 min)
+- [x] 8. Paths de `ingredients` (~8 min)
 - [ ] 9. Paths de `dishes` y `public/restaurants/{restaurantId}/dishes` (~10 min)
 - [ ] 10. Paths de `orders`, documentando el 400 del PATCH con pedido inexistente (~10 min)
 - [ ] 11. Añadir `@redocly/cli` y scripts `docs:lint` y `docs:build` (~5 min)
