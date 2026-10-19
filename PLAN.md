@@ -18,7 +18,7 @@ Cada tarea debe durar entre 5 y 10 minutos.
 
 - [x] 1. Leer controladores y servicios; anotar bodies, query params y códigos de respuesta (~10 min)
 - [x] 2. Crear `docs/api/openapi.yaml` con `info`, `servers`, `tags`, `bearerAuth` y componentes comunes de error (~8 min)
-- [ ] 3. Esquemas `Restaurant`, `Ingredient`, `Dish` (+ `DishIngredient`) y sus entradas create/update (~10 min)
+- [x] 3. Esquemas `Restaurant`, `Ingredient`, `Dish` (+ `DishIngredient`) y sus entradas create/update (~10 min)
 - [ ] 4. Esquemas `Order`, `OrderItem`, creación de pedido, `Employee`, login y register (~10 min)
 - [ ] 5. Paths de `auth` y `/health` (~7 min)
 - [ ] 6. Paths de `employees` y `restaurants/{restaurantId}/employees` (~8 min)

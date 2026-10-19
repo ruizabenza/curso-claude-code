@@ -84,4 +84,90 @@ components:
       properties:
         error:
           type: string
+    Restaurant:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        address: { type: string }
+        email: { type: string, format: email }
+        phone: { type: string }
+        ownerFirstName: { type: string }
+        ownerLastName: { type: string }
+        logoUrl: { type: string, nullable: true }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    RestaurantInput:
+      type: object
+      required: [name, address, email, phone, ownerFirstName, ownerLastName]
+      properties:
+        name: { type: string }
+        address: { type: string }
+        email: { type: string, format: email }
+        phone: { type: string }
+        ownerFirstName: { type: string }
+        ownerLastName: { type: string }
+        logoUrl: { type: string, nullable: true }
+    IngredientUnit:
+      type: string
+      enum: [kg, g, l, ml, unidad]
+    Ingredient:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        unit: { $ref: '#/components/schemas/IngredientUnit' }
+        currentStock: { type: number }
+        restaurantId: { type: string }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    IngredientCreate:
+      type: object
+      required: [name, unit]
+      properties:
+        name: { type: string }
+        unit: { $ref: '#/components/schemas/IngredientUnit' }
+        currentStock: { type: number, minimum: 0, default: 0 }
+    IngredientUpdate:
+      type: object
+      properties:
+        name: { type: string }
+        unit: { $ref: '#/components/schemas/IngredientUnit' }
+        currentStock: { type: number, minimum: 0 }
+    DishCategory:
+      type: string
+      enum: [entrante, principal, postre, bebida]
+    DishIngredient:
+      type: object
+      required: [ingredientId, quantity]
+      properties:
+        ingredientId: { type: string }
+        quantity: { type: number, exclusiveMinimum: true, minimum: 0 }
+    Dish:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { type: string, nullable: true }
+        price: { type: number }
+        category: { $ref: '#/components/schemas/DishCategory' }
+        available: { type: boolean }
+        restaurantId: { type: string }
+        ingredients:
+          type: array
+          items: { $ref: '#/components/schemas/DishIngredient' }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    DishInput:
+      type: object
+      required: [name, price, category]
+      properties:
+        name: { type: string }
+        description: { type: string, nullable: true }
+        price: { type: number, exclusiveMinimum: true, minimum: 0 }
+        category: { $ref: '#/components/schemas/DishCategory' }
+        available: { type: boolean, default: true }
+        ingredients:
+          type: array
+          items: { $ref: '#/components/schemas/DishIngredient' }
 paths: {}
