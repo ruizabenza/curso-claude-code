@@ -30,7 +30,7 @@ Cada tarea debe durar entre 5 y 10 minutos.
 - [x] 12. Ejecutar `npm run docs:lint` y corregir errores (~10 min)
 - [x] 13. Test de contrato `packages/api/src/openapi.test.ts` (~10 min)
 - [x] 14. Ejecutar `npm run docs:build` y comprobar el HTML (~5 min)
-- [ ] 15. Documentar en `CLAUDE.md` y `docs/arquitectura/arquitectura-api.md` (~5 min)
+- [x] 15. Documentar en `CLAUDE.md` y `docs/arquitectura/arquitectura-api.md` (~5 min)
 
 **Tiempo total estimado:** 124 min
 

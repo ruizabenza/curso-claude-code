@@ -260,6 +260,8 @@ La excepción es `employee`: como sus rutas están repartidas en tres ficheros, 
 
 ## Endpoints
 
+> El contrato formal de estos endpoints está en [`docs/api/openapi.yaml`](../api/openapi.yaml) y su documentación HTML en [`docs/api/index.html`](../api/index.html). Se valida con `npm run docs:lint`, se regenera con `npm run docs:build` y `packages/api/src/openapi.test.ts` comprueba que no se desincroniza de las rutas.
+
 Todos cuelgan de `/api/v1`. La columna **Roles** indica qué valores de `req.user.role` acepta `authorize()`; “autenticado” significa que basta con un JWT válido, sin filtro de rol.
 
 ### Públicos (sin autenticación)
