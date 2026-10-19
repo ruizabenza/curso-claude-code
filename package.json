@@ -11,6 +11,11 @@
     "dev:empleados": "npm run start -w @resttek/web-empleados",
     "dev:clientes": "npm run start -w @resttek/web-clientes",
     "test": "npm run test -w @resttek/api",
-    "seed": "npm run seed -w @resttek/api"
+    "seed": "npm run seed -w @resttek/api",
+    "docs:lint": "redocly lint docs/api/openapi.yaml",
+    "docs:build": "redocly build-docs docs/api/openapi.yaml -o docs/api/index.html"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^2.65.0"
   }
 }
