@@ -593,3 +593,110 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
         '404': { $ref: '#/components/responses/NotFound' }
+  /restaurants/{restaurantId}/dishes:
+    parameters:
+      - { name: restaurantId, in: path, required: true, schema: { type: string } }
+    post:
+      tags: [Platos]
+      summary: Crea un plato
+      description: 'Roles permitidos: `admin`, `manager`.'
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/DishInput' }
+      responses:
+        '201':
+          description: Plato creado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Dish' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    get:
+      tags: [Platos]
+      summary: Lista los platos de un restaurante
+      description: 'Roles permitidos: `admin`, `manager`, `camarero`, `cocinero`.'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de platos
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Dish' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  /restaurants/{restaurantId}/dishes/{id}:
+    parameters:
+      - { name: restaurantId, in: path, required: true, schema: { type: string } }
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Platos]
+      summary: Obtiene un plato
+      description: 'Roles permitidos: `admin`, `manager`, `camarero`, `cocinero`.'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Plato
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Dish' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    put:
+      tags: [Platos]
+      summary: Actualiza un plato
+      description: 'Roles permitidos: `admin`, `manager`.'
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/DishInput' }
+      responses:
+        '200':
+          description: Plato actualizado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Dish' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    delete:
+      tags: [Platos]
+      summary: Elimina un plato
+      description: 'Roles permitidos: `admin`, `manager`.'
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Plato eliminado
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /public/restaurants/{restaurantId}/dishes:
+    get:
+      tags: [Público]
+      summary: Lista los platos disponibles de un restaurante
+      description: Devuelve solo los platos con `available = true`.
+      security: []
+      parameters:
+        - { name: restaurantId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Platos disponibles
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Dish' }
