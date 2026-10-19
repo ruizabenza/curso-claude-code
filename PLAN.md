@@ -36,14 +36,14 @@ Cada tarea debe durar entre 5 y 10 minutos.
 
 ## Criterios de aceptación
 
-- [ ] `docs/api/openapi.yaml` existe y `npm run docs:lint` termina sin errores.
-- [ ] El contrato describe los 29 endpoints de `src/app.ts`; públicos y `/auth/*` sin seguridad, el resto con `bearerAuth` y roles.
-- [ ] Cada operación incluye la respuesta de éxito y las de error aplicables (400, 401, 403, 404) con formato `{error, message}`.
-- [ ] `npm run docs:build` genera `docs/api/index.html` con todos los endpoints agrupados por tag.
-- [ ] `PATCH /orders/{orderId}/items/{itemId}/status` con pedido inexistente devuelve 400 en el contrato, igual que la API real.
-- [ ] El test de contrato falla si falta en el YAML alguna ruta de la lista y pasa si coinciden.
-- [ ] `npm test` (Vitest, equivalente de `pytest` aquí) pasa sin fallos.
-- [ ] Se mantienen las reglas de `CLAUDE.md`: no se modifica código de producción y los nombres de dominio quedan en español.
+- [x] `docs/api/openapi.yaml` existe y `npm run docs:lint` termina sin errores.
+- [x] El contrato describe los 29 endpoints de `src/app.ts`; públicos y `/auth/*` sin seguridad, el resto con `bearerAuth` y roles.
+- [x] Cada operación incluye la respuesta de éxito y las de error aplicables (400, 401, 403, 404) con formato `{error, message}`.
+- [x] `npm run docs:build` genera `docs/api/index.html` con todos los endpoints agrupados por tag.
+- [x] `PATCH /orders/{orderId}/items/{itemId}/status` con pedido inexistente devuelve 400 en el contrato, igual que la API real.
+- [x] El test de contrato falla si falta en el YAML alguna ruta de la lista y pasa si coinciden.
+- [x] `npm test` (Vitest, equivalente de `pytest` aquí) pasa sin fallos.
+- [x] Se mantienen las reglas de `CLAUDE.md`: no se modifica código de producción y los nombres de dominio quedan en español.
 
 ## Riesgos y notas
 
