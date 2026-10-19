@@ -258,11 +258,12 @@ components:
     AuthResponse:
       type: object
       properties:
-        token: { type: string, description: JWT con id, role y restaurantId }
+        token: { type: string, description: 'JWT con id, role y restaurantId' }
         employee: { $ref: '#/components/schemas/Employee' }
 paths:
   /health:
     get:
+      operationId: getHealth
       tags: [Sistema]
       summary: Comprueba que el servicio está activo
       description: Se sirve en `/health` (sin el prefijo `/api/v1`).
@@ -280,6 +281,7 @@ paths:
                   status: { type: string, example: ok }
   /auth/login:
     post:
+      operationId: login
       tags: [Auth]
       summary: Inicia sesión
       security: []
@@ -301,6 +303,7 @@ paths:
               schema: { $ref: '#/components/schemas/Error' }
   /auth/register:
     post:
+      operationId: registerClient
       tags: [Auth]
       summary: Registra un cliente
       description: Crea un usuario con rol `cliente` y devuelve su token.
@@ -323,6 +326,7 @@ paths:
               schema: { $ref: '#/components/schemas/Error' }
   /employees:
     post:
+      operationId: createEmployee
       tags: [Empleados]
       summary: Crea un empleado
       description: 'Roles permitidos: `admin`.'
@@ -343,6 +347,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
     get:
+      operationId: listEmployees
       tags: [Empleados]
       summary: Lista empleados
       description: 'Roles permitidos: `admin`.'
@@ -364,6 +369,7 @@ paths:
         '403': { $ref: '#/components/responses/Forbidden' }
   /employees/{id}:
     get:
+      operationId: getEmployee
       tags: [Empleados]
       summary: Obtiene un empleado
       description: 'Roles permitidos: `admin`.'
@@ -382,6 +388,7 @@ paths:
         '404': { $ref: '#/components/responses/NotFound' }
   /restaurants/{restaurantId}/employees:
     get:
+      operationId: listEmployeesByRestaurant
       tags: [Empleados]
       summary: Lista los empleados de un restaurante
       description: 'Roles permitidos: `admin`.'
@@ -401,6 +408,7 @@ paths:
         '403': { $ref: '#/components/responses/Forbidden' }
   /restaurants:
     post:
+      operationId: createRestaurant
       tags: [Restaurantes]
       summary: Crea un restaurante
       description: 'Roles permitidos: `admin`.'
@@ -421,6 +429,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
     get:
+      operationId: listRestaurants
       tags: [Restaurantes]
       summary: Lista restaurantes
       description: |
@@ -441,6 +450,7 @@ paths:
     parameters:
       - { name: id, in: path, required: true, schema: { type: string } }
     get:
+      operationId: getRestaurant
       tags: [Restaurantes]
       summary: Obtiene un restaurante
       description: Cualquier usuario autenticado.
@@ -455,6 +465,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '404': { $ref: '#/components/responses/NotFound' }
     put:
+      operationId: updateRestaurant
       tags: [Restaurantes]
       summary: Actualiza un restaurante
       description: 'Roles permitidos: `admin`.'
@@ -477,6 +488,7 @@ paths:
         '404': { $ref: '#/components/responses/NotFound' }
   /public/restaurants:
     get:
+      operationId: listPublicRestaurants
       tags: [Público]
       summary: Lista todos los restaurantes
       security: []
@@ -490,6 +502,7 @@ paths:
                 items: { $ref: '#/components/schemas/Restaurant' }
   /public/restaurants/{id}:
     get:
+      operationId: getPublicRestaurant
       tags: [Público]
       summary: Obtiene un restaurante
       security: []
@@ -506,6 +519,7 @@ paths:
     parameters:
       - { name: restaurantId, in: path, required: true, schema: { type: string } }
     post:
+      operationId: createIngredient
       tags: [Ingredientes]
       summary: Crea un ingrediente
       description: 'Roles permitidos: `admin`.'
@@ -526,6 +540,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
     get:
+      operationId: listIngredients
       tags: [Ingredientes]
       summary: Lista los ingredientes de un restaurante
       description: 'Roles permitidos: `admin`, `manager`, `cocinero`.'
@@ -546,6 +561,7 @@ paths:
       - { name: restaurantId, in: path, required: true, schema: { type: string } }
       - { name: id, in: path, required: true, schema: { type: string } }
     get:
+      operationId: getIngredient
       tags: [Ingredientes]
       summary: Obtiene un ingrediente
       description: 'Roles permitidos: `admin`, `manager`, `cocinero`.'
@@ -561,6 +577,7 @@ paths:
         '403': { $ref: '#/components/responses/Forbidden' }
         '404': { $ref: '#/components/responses/NotFound' }
     put:
+      operationId: updateIngredient
       tags: [Ingredientes]
       summary: Actualiza un ingrediente
       description: 'Roles permitidos: `admin`.'
@@ -582,6 +599,7 @@ paths:
         '403': { $ref: '#/components/responses/Forbidden' }
         '404': { $ref: '#/components/responses/NotFound' }
     delete:
+      operationId: deleteIngredient
       tags: [Ingredientes]
       summary: Elimina un ingrediente
       description: 'Roles permitidos: `admin`.'
@@ -597,6 +615,7 @@ paths:
     parameters:
       - { name: restaurantId, in: path, required: true, schema: { type: string } }
     post:
+      operationId: createDish
       tags: [Platos]
       summary: Crea un plato
       description: 'Roles permitidos: `admin`, `manager`.'
@@ -617,6 +636,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
     get:
+      operationId: listDishes
       tags: [Platos]
       summary: Lista los platos de un restaurante
       description: 'Roles permitidos: `admin`, `manager`, `camarero`, `cocinero`.'
@@ -637,6 +657,7 @@ paths:
       - { name: restaurantId, in: path, required: true, schema: { type: string } }
       - { name: id, in: path, required: true, schema: { type: string } }
     get:
+      operationId: getDish
       tags: [Platos]
       summary: Obtiene un plato
       description: 'Roles permitidos: `admin`, `manager`, `camarero`, `cocinero`.'
@@ -652,6 +673,7 @@ paths:
         '403': { $ref: '#/components/responses/Forbidden' }
         '404': { $ref: '#/components/responses/NotFound' }
     put:
+      operationId: updateDish
       tags: [Platos]
       summary: Actualiza un plato
       description: 'Roles permitidos: `admin`, `manager`.'
@@ -673,6 +695,7 @@ paths:
         '403': { $ref: '#/components/responses/Forbidden' }
         '404': { $ref: '#/components/responses/NotFound' }
     delete:
+      operationId: deleteDish
       tags: [Platos]
       summary: Elimina un plato
       description: 'Roles permitidos: `admin`, `manager`.'
@@ -686,6 +709,7 @@ paths:
         '404': { $ref: '#/components/responses/NotFound' }
   /public/restaurants/{restaurantId}/dishes:
     get:
+      operationId: listPublicDishes
       tags: [Público]
       summary: Lista los platos disponibles de un restaurante
       description: Devuelve solo los platos con `available = true`.
@@ -702,6 +726,7 @@ paths:
                 items: { $ref: '#/components/schemas/Dish' }
   /orders:
     post:
+      operationId: createOrder
       tags: [Pedidos]
       summary: Crea un pedido
       description: |
@@ -728,6 +753,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
   /orders/active:
     get:
+      operationId: listActiveOrders
       tags: [Pedidos]
       summary: Lista los pedidos activos de un restaurante
       description: Cualquier usuario autenticado.
@@ -753,6 +779,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
   /orders/mine:
     get:
+      operationId: listMyOrders
       tags: [Pedidos]
       summary: Lista los pedidos del usuario autenticado
       security:
@@ -768,6 +795,7 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
   /orders/{id}:
     get:
+      operationId: getOrder
       tags: [Pedidos]
       summary: Obtiene un pedido
       description: Cualquier usuario autenticado.
@@ -789,6 +817,7 @@ paths:
               schema: { $ref: '#/components/schemas/SimpleError' }
   /orders/{orderId}/items/{itemId}/status:
     patch:
+      operationId: updateOrderItemStatus
       tags: [Pedidos]
       summary: Cambia el estado de una línea de pedido
       description: |
