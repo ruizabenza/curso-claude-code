@@ -28,7 +28,7 @@ Cada tarea debe durar entre 5 y 10 minutos.
 - [x] 10. Paths de `orders`, documentando el 400 del PATCH con pedido inexistente (~10 min)
 - [x] 11. Añadir `@redocly/cli` y scripts `docs:lint` y `docs:build` (~5 min)
 - [x] 12. Ejecutar `npm run docs:lint` y corregir errores (~10 min)
-- [ ] 13. Test de contrato `packages/api/src/openapi.test.ts` (~10 min)
+- [x] 13. Test de contrato `packages/api/src/openapi.test.ts` (~10 min)
 - [ ] 14. Ejecutar `npm run docs:build` y comprobar el HTML (~5 min)
 - [ ] 15. Documentar en `CLAUDE.md` y `docs/arquitectura/arquitectura-api.md` (~5 min)
 
