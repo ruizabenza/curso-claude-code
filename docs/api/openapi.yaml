@@ -170,4 +170,94 @@ components:
         ingredients:
           type: array
           items: { $ref: '#/components/schemas/DishIngredient' }
+    OrderStatus:
+      type: string
+      enum: [pendiente, preparando, listo, entregado]
+    OrderItem:
+      type: object
+      properties:
+        id: { type: string }
+        dishId: { type: string }
+        quantity: { type: integer, minimum: 1 }
+        notes: { type: string, nullable: true }
+        status: { $ref: '#/components/schemas/OrderStatus' }
+        dishName: { type: string }
+        dishPrice: { type: number }
+        dishCategory: { type: string }
+    Order:
+      type: object
+      properties:
+        id: { type: string }
+        restaurantId: { type: string }
+        tableId: { type: string, nullable: true }
+        clientId: { type: string, nullable: true }
+        createdAt: { type: string, format: date-time }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/OrderItem' }
+        restaurantName: { type: string }
+        restaurantLogoUrl: { type: string, nullable: true }
+    OrderItemInput:
+      type: object
+      required: [dishId, quantity]
+      properties:
+        dishId: { type: string }
+        quantity: { type: integer, minimum: 1 }
+        notes: { type: string, nullable: true }
+    OrderCreate:
+      type: object
+      required: [restaurantId, items]
+      properties:
+        restaurantId: { type: string }
+        tableId: { type: string, nullable: true }
+        items:
+          type: array
+          minItems: 1
+          items: { $ref: '#/components/schemas/OrderItemInput' }
+    OrderItemStatusUpdate:
+      type: object
+      required: [status]
+      properties:
+        status: { $ref: '#/components/schemas/OrderStatus' }
+    Role:
+      type: string
+      enum: [admin, manager, camarero, cocinero, cliente]
+    Employee:
+      type: object
+      properties:
+        id: { type: string }
+        firstName: { type: string }
+        lastName: { type: string }
+        email: { type: string, format: email }
+        role: { $ref: '#/components/schemas/Role' }
+        restaurantId: { type: string, nullable: true }
+    EmployeeCreate:
+      type: object
+      required: [firstName, lastName, email, password, role]
+      properties:
+        firstName: { type: string }
+        lastName: { type: string }
+        email: { type: string, format: email }
+        password: { type: string, format: password }
+        role: { $ref: '#/components/schemas/Role' }
+        restaurantId: { type: string, nullable: true }
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, format: password }
+    RegisterRequest:
+      type: object
+      required: [firstName, lastName, email, password]
+      properties:
+        firstName: { type: string }
+        lastName: { type: string }
+        email: { type: string, format: email }
+        password: { type: string, format: password }
+    AuthResponse:
+      type: object
+      properties:
+        token: { type: string, description: JWT con id, role y restaurantId }
+        employee: { $ref: '#/components/schemas/Employee' }
 paths: {}
