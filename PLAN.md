@@ -25,7 +25,7 @@ Cada tarea debe durar entre 5 y 10 minutos.
 - [x] 7. Paths de `restaurants` y `public/restaurants` (~8 min)
 - [x] 8. Paths de `ingredients` (~8 min)
 - [x] 9. Paths de `dishes` y `public/restaurants/{restaurantId}/dishes` (~10 min)
-- [ ] 10. Paths de `orders`, documentando el 400 del PATCH con pedido inexistente (~10 min)
+- [x] 10. Paths de `orders`, documentando el 400 del PATCH con pedido inexistente (~10 min)
 - [ ] 11. Añadir `@redocly/cli` y scripts `docs:lint` y `docs:build` (~5 min)
 - [ ] 12. Ejecutar `npm run docs:lint` y corregir errores (~10 min)
 - [ ] 13. Test de contrato `packages/api/src/openapi.test.ts` (~10 min)
